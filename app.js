@@ -1,23 +1,22 @@
 const express = require('express');
 
+const app = express();
+
 const {
   PORT = 3000,
 } = process.env;
 
-const app = express();
+const homeRouter = require('./routes/home');
+const SignInRouter = require('./routes/Sign-In');
+const SignUpRouter = require('./routes/Sign-up');
+const MainRouter = require('./routes/main');
 
-const startRouter = require('./routs/start');
-const signUpRouter = require('./routs/signUp');
-const signInRouter = require('./routs/signIn');
-const homeRouter = require('./routs/home');
-const logoutRouter = require('./routs/logout');
-
-app.use('/', startRouter);
-app.use('/sign-up', signUpRouter);
-app.use('/sign-in', signInRouter);
-app.use('/home', homeRouter);
-app.use('/logout', logoutRouter);
+app.use('/', homeRouter);
+app.use('/SignIn', SignInRouter);
+app.use('/SignUp', SignUpRouter);
+app.use('/Main', MainRouter);
 
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}... Press Ctrl+C to stop it...`);
+  // eslint-disable-next-line no-console
+  console.log(`Server is listening on port ${PORT}...`);
 });
